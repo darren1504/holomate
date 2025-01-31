@@ -1,10 +1,10 @@
 "use client";
 
 import { useSearchParams, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { Event } from "@/types/data";
 
-export default function RoomConfirm() {
+function RoomConfirmContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -56,5 +56,15 @@ export default function RoomConfirm() {
         </div>
       </main>
     </div>
+  );
+}
+
+export default function RoomConfirm() {
+  return (
+    <Suspense
+      fallback={<p className="text-center text-white">読み込み中...</p>}
+    >
+      <RoomConfirmContent />
+    </Suspense>
   );
 }
